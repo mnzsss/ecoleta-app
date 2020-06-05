@@ -1,9 +1,14 @@
 import styled from 'styled-components/native';
+import Constants from 'expo-constants';
+import MapView, { Marker } from 'react-native-maps';
 
 export const Container = styled.View`
   flex: 1;
   padding: 0 32px;
+  padding-top: ${20 + Constants.statusBarHeight}px;
 `;
+
+export const ButtonBack = styled.TouchableOpacity``;
 
 export const Title = styled.Text`
   font-size: 20px;
@@ -26,12 +31,12 @@ export const MapContainer = styled.View`
   margin-top: 16px;
 `;
 
-export const Map = styled.View`
+export const Map = styled(MapView)`
   width: 100%;
   height: 100%;
 `;
 
-export const MapMarker = styled.View`
+export const MapMarker = styled(Marker)`
   width: 90px;
   height: 80px;
 `;
@@ -46,10 +51,9 @@ export const MapMarkerContainer = styled.View`
   align-items: center;
 `;
 
-export const MapMarkerImage = styled.View`
+export const MapMarkerImage = styled.Image`
   width: 90px;
   height: 45px;
-  resize: cover;
 `;
 
 export const MapMarkerTitle = styled.Text`
@@ -66,7 +70,7 @@ export const ItemsContainer = styled.View`
   margin-bottom: 32px;
 `;
 
-export const Item = styled.View`
+export const Item = styled.TouchableOpacity`
   background-color: #fff;
   border-width: 2px;
   border-radius: 8px;
