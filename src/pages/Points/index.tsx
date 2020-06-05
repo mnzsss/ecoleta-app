@@ -1,9 +1,11 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Feather } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { SvgUri } from 'react-native-svg';
-
 import { ScrollView } from 'react-native-gesture-handler';
+
+import api from '../../services/api';
+
 import {
   Container,
   ButtonBack,
@@ -20,8 +22,42 @@ import {
   MapMarkerTitle,
 } from './styles';
 
+interface Item {
+  id: number;
+  name: string;
+  image_url: string;
+}
+
 const Points: React.FC = () => {
   const navigation = useNavigation();
+
+  const [items, setItems] = useState<Item[]>([]);
+  const [selectedItems, setSelectedItems] = useState<number[]>([]);
+
+  useEffect(() => {
+    async function loadItems(): Promise<void> {
+      const { data } = await api.get('items');
+
+      setItems(data);
+    }
+
+    loadItems();
+  }, []);
+
+  const handleSelectItem = useCallback(
+    (id: number) => {
+      const alreadySelected = selectedItems.findIndex(item => item === id);
+
+      if (alreadySelected >= 0) {
+        const filteredItems = selectedItems.filter(item => item !== id);
+
+        setSelectedItems(filteredItems);
+      } else {
+        setSelectedItems(old => [...old, id]);
+      }
+    },
+    [selectedItems],
+  );
 
   const handlePointDetail = useCallback(() => {
     navigation.navigate('Detail');
@@ -71,62 +107,17 @@ const Points: React.FC = () => {
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={{ paddingHorizontal: 32 }}
         >
-          <Item onPress={() => {}}>
-            <SvgUri
-              width={42}
-              height={42}
-              uri="http://192.168.0.5:3333/uploads/organicos.svg"
-            />
-            <ItemTitle>Lâmpadas</ItemTitle>
-          </Item>
-          <Item onPress={() => {}}>
-            <SvgUri
-              width={42}
-              height={42}
-              uri="http://192.168.0.5:3333/uploads/organicos.svg"
-            />
-            <ItemTitle>Lâmpadas</ItemTitle>
-          </Item>
-          <Item onPress={() => {}}>
-            <SvgUri
-              width={42}
-              height={42}
-              uri="http://192.168.0.5:3333/uploads/organicos.svg"
-            />
-            <ItemTitle>Lâmpadas</ItemTitle>
-          </Item>
-          <Item onPress={() => {}}>
-            <SvgUri
-              width={42}
-              height={42}
-              uri="http://192.168.0.5:3333/uploads/organicos.svg"
-            />
-            <ItemTitle>Lâmpadas</ItemTitle>
-          </Item>
-          <Item onPress={() => {}}>
-            <SvgUri
-              width={42}
-              height={42}
-              uri="http://192.168.0.5:3333/uploads/organicos.svg"
-            />
-            <ItemTitle>Lâmpadas</ItemTitle>
-          </Item>
-          <Item onPress={() => {}}>
-            <SvgUri
-              width={42}
-              height={42}
-              uri="http://192.168.0.5:3333/uploads/organicos.svg"
-            />
-            <ItemTitle>Lâmpadas</ItemTitle>
-          </Item>
-          <Item onPress={() => {}}>
-            <SvgUri
-              width={42}
-              height={42}
-              uri="http://192.168.0.5:3333/uploads/organicos.svg"
-            />
-            <ItemTitle>Lâmpadas</ItemTitle>
-          </Item>
+          {items.map(item => (
+            <Item
+              onPress={() => handleSelectItem(item.id)}
+              key={String(item.id)}
+              activeOpacity={0.6}
+              selected={!!selectedItems.includes(item.id)}
+            >
+              <SvgUri width={42} height={42} uri={item.image_url} />
+              <ItemTitle>{item.name}</ItemTitle>
+            </Item>
+          ))}
         </ScrollView>
       </ItemsContainer>
     </>
