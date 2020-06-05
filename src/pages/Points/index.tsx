@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { Feather } from '@expo/vector-icons';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import { SvgUri } from 'react-native-svg';
 import { ScrollView } from 'react-native-gesture-handler';
 import * as Location from 'expo-location';
@@ -24,6 +24,11 @@ import {
   MapMarkerTitle,
 } from './styles';
 
+interface PointsParams {
+  uf: string;
+  city: string;
+}
+
 interface Item {
   id: number;
   name: string;
@@ -40,6 +45,9 @@ interface Point {
 
 const Points: React.FC = () => {
   const navigation = useNavigation();
+  const { params } = useRoute();
+
+  const { uf, city } = params as PointsParams;
 
   const [items, setItems] = useState<Item[]>([]);
   const [points, setPoints] = useState<Point[]>([]);
@@ -86,9 +94,9 @@ const Points: React.FC = () => {
     async function loadPoints(): Promise<void> {
       const { data } = await api.get('points', {
         params: {
-          city: 'São Paulo',
-          uf: 'SP',
-          items: [1, 2],
+          city,
+          uf,
+          items: selectedItems,
         },
       });
 
@@ -96,7 +104,7 @@ const Points: React.FC = () => {
     }
 
     loadPoints();
-  }, []);
+  }, [city, selectedItems, uf]);
 
   const handleSelectItem = useCallback(
     (id: number) => {

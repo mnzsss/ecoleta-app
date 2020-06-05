@@ -39,6 +39,7 @@ export const Button = styled(RectButton)`
   overflow: hidden;
   align-items: center;
   margin-top: 8px;
+  margin-bottom: 20px;
 `;
 
 export const ButtonIcon = styled.View`
