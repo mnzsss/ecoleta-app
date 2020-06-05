@@ -1,77 +1,73 @@
 import styled from 'styled-components/native';
+import { RectButton } from 'react-native-gesture-handler';
 
-export const Container = styled.View``;
+export const Container = styled.View`
+  flex: 1;
+  padding: 0 32px;
+  padding-top: 20px;
+`;
 
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     padding: 32,
-//     paddingTop: 20,
-//   },
+export const ButtonBack = styled.TouchableOpacity``;
 
-//   pointImage: {
-//     width: '100%',
-//     height: 120,
-//     resizeMode: 'cover',
-//     borderRadius: 10,
-//     marginTop: 32,
-//   },
+export const PointImage = styled.Image`
+  width: 100%;
+  height: 120px;
+  border-radius: 10px;
+  margin-top: 32px;
+`;
 
-//   pointName: {
-//     color: '#322153',
-//     fontSize: 28,
-//     fontFamily: 'Ubuntu_700Bold',
-//     marginTop: 24,
-//   },
+export const PointName = styled.Text`
+  color: #322153;
+  font-size: 28px;
+  font-family: 'Ubuntu_700Bold';
+  margin-top: 24px;
+`;
 
-//   pointItems: {
-//     fontFamily: 'Roboto_400Regular',
-//     fontSize: 16,
-//     lineHeight: 24,
-//     marginTop: 8,
-//     color: '#6C6C80',
-//   },
+export const PointItems = styled.Text`
+  font-family: 'Roboto_400Regular';
+  font-size: 16px;
+  line-height: 24px;
+  margin-top: 8px;
+  color: #6c6c80;
+`;
 
-//   address: {
-//     marginTop: 32,
-//   },
+export const Address = styled.View`
+  margin-top: 32px;
+`;
 
-//   addressTitle: {
-//     color: '#322153',
-//     fontFamily: 'Roboto_500Medium',
-//     fontSize: 16,
-//   },
+export const AddressTitle = styled.Text`
+  color: #322153;
+  font-family: 'Roboto_500Medium';
+  font-size: 16px;
+`;
 
-//   addressContent: {
-//     fontFamily: 'Roboto_400Regular',
-//     lineHeight: 24,
-//     marginTop: 8,
-//     color: '#6C6C80',
-//   },
+export const AddressContent = styled.Text`
+  font-family: 'Roboto_400Regular';
+  line-height: 24px;
+  margin-top: 8px;
+  color: #6c6c80;
+`;
 
-//   footer: {
-//     borderTopWidth: StyleSheet.hairlineWidth,
-//     borderColor: '#999',
-//     paddingVertical: 20,
-//     paddingHorizontal: 32,
-//     flexDirection: 'row',
-//     justifyContent: 'space-between',
-//   },
+export const Footer = styled.View`
+  border-color: #999;
+  padding: 20px 32px 0;
+  flex-direction: row;
+  justify-content: space-between;
+`;
 
-//   button: {
-//     width: '48%',
-//     backgroundColor: '#34CB79',
-//     borderRadius: 10,
-//     height: 50,
-//     flexDirection: 'row',
-//     justifyContent: 'center',
-//     alignItems: 'center',
-//   },
+export const Button = styled(RectButton)`
+  width: 48%;
+  background-color: #34cb79;
+  border-radius: 10px;
+  height: 50px;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+`;
 
-//   buttonText: {
-//     marginLeft: 8,
-//     color: '#FFF',
-//     fontSize: 16,
-//     fontFamily: 'Roboto_500Medium',
-//   },
-// });
+export const ButtonText = styled.Text`
+  font-family: 'Roboto_500Medium';
+  font-size: 16px;
+  color: #fff;
+  margin-left: 8px;
+`;
